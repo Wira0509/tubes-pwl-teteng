@@ -7,6 +7,5 @@
 </head>
 <body>
     Hello, this is the home page.
-    <p>Welcome to our website!</p>
 </body>
 </html>
