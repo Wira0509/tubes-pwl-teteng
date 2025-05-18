@@ -9,6 +9,12 @@ use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
+    // Tampilkan form gabungan login dan register
+    public function showLoginRegisterForm()
+    {
+        return view('loginandregister');
+    }
+
     // Tampilkan form pendaftaran
     public function showRegisterForm()
     {
@@ -30,7 +36,7 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('login')->with('success', 'Registrasi berhasil. Silakan login.');
+        return redirect()->route('auth.form')->with('success', 'Registrasi berhasil. Silakan login.');
     }
 
     // Tampilkan form login
