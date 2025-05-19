@@ -262,6 +262,34 @@
         color: #3c97bf;
         text-decoration: none;
       }
+
+      /* New alert styles */
+      .alert {
+        border-radius: 8px;
+        padding: 15px 20px;
+        margin-bottom: 20px;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      }
+
+      .alert-success {
+        background-color: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+
+      .alert-error {
+        background-color: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+      }
+
+      .alert-icon {
+        font-size: 18px;
+      }
     </style>
   </head>
   <body>
@@ -283,8 +311,18 @@
 
           <input type="text" name="name" placeholder="Nama" value="{{ old('name') }}" required />
           <input type="email" name="email" placeholder="Email" value="{{ old('email') }}" required />
-          <input type="password" name="password" placeholder="Password" required />
-          <input type="password" name="password_confirmation" placeholder="Konfirmasi Password" required />
+          <div style="position: relative; width: 100%;">
+            <input type="password" name="password" placeholder="Password" required style="padding-right: 50px;" />
+            <button type="button" class="toggle-password" style="position: absolute; right: 0px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; padding: 0 10px;">
+              <i class="fa fa-eye" style="color: black;"></i>
+            </button>
+          </div>
+          <div style="position: relative; width: 100%;">
+            <input type="password" name="password_confirmation" placeholder="Konfirmasi Password" required style="padding-right: 50px;" />
+            <button type="button" class="toggle-password" style="position: absolute; right: 0px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; padding: 0 10px;">
+              <i class="fa fa-eye" style="color: black;"></i>
+            </button>
+          </div>
           <button>Daftar</button>
         </form>
       </div>
@@ -294,23 +332,30 @@
           <h1>Masuk</h1>
 
           @if(session('success'))
-            <div class="mb-4 text-green-600">
+            <div class="alert alert-success">
+              <i class="fa fa-check-circle alert-icon" aria-hidden="true"></i>
               {{ session('success') }}
             </div>
           @endif
 
-          @if ($errors->any())
-            <div class="mb-4 text-red-600">
-              <ul>
-                @foreach ($errors->all() as $error)
-                  <li>- {{ $error }}</li>
+          @if ($errors->login->any())
+            <div class="alert alert-error">
+              <i class="fa fa-exclamation-triangle alert-icon" aria-hidden="true"></i>
+              <ul style="margin: 0; padding-left: 20px; list-style-type: none;">
+                @foreach ($errors->login->all() as $error)
+                  <li>{{ $error }}</li>
                 @endforeach
               </ul>
             </div>
           @endif
 
           <input type="email" name="email" placeholder="Email" value="{{ old('email') }}" required />
-          <input type="password" name="password" placeholder="Password" required />
+          <div style="position: relative; width: 100%;">
+            <input type="password" name="password" placeholder="Password" required style="padding-right: 50px;" />
+            <button type="button" class="toggle-password" style="position: absolute; right: 0px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; padding: 0 10px;">
+              <i class="fa fa-eye" style="color: black;"></i>
+            </button>
+          </div>
           <a href="{{ route('login') }}">Lupa password?</a>
           <button>Masuk</button>
         </form>
@@ -344,6 +389,49 @@
 
       signInButton.addEventListener("click", () => {
         container.classList.remove("right-panel-active");
+        // Clear error and success messages when switching to sign-in
+        const signUpContainer = document.querySelector('.sign-up-container');
+        const signInContainer = document.querySelector('.sign-in-container');
+        if (signUpContainer) {
+          const alerts = signUpContainer.querySelectorAll('.alert');
+          alerts.forEach(alert => alert.style.display = 'none');
+        }
+        if (signInContainer) {
+          const alerts = signInContainer.querySelectorAll('.alert');
+          alerts.forEach(alert => alert.style.display = 'none');
+        }
+      });
+
+      signUpButton.addEventListener("click", () => {
+        container.classList.add("right-panel-active");
+        // Clear error and success messages when switching to sign-up
+        const signUpContainer = document.querySelector('.sign-up-container');
+        const signInContainer = document.querySelector('.sign-in-container');
+        if (signUpContainer) {
+          const alerts = signUpContainer.querySelectorAll('.alert');
+          alerts.forEach(alert => alert.style.display = 'none');
+        }
+        if (signInContainer) {
+          const alerts = signInContainer.querySelectorAll('.alert');
+          alerts.forEach(alert => alert.style.display = 'none');
+        }
+      });
+
+      // Script untuk toggle show/hide password
+      document.querySelectorAll('.toggle-password').forEach(button => {
+        button.addEventListener('click', () => {
+          const input = button.previousElementSibling;
+          const icon = button.querySelector('i');
+          if (input.type === 'password') {
+            input.type = 'text';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+          } else {
+            input.type = 'password';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+          }
+        });
       });
     </script>
   </body>

@@ -7,7 +7,7 @@
             if ($('#spinner').length > 0) {
                 $('#spinner').removeClass('show');
             }
-        }, 1);
+        }, 1000);
     };
     spinner();
     
@@ -89,6 +89,24 @@
 
         portfolioIsotope.isotope({filter: $(this).data('filter')});
     });
+
+    // Fungsi untuk mengatur warna background tombol logout berdasarkan posisi scroll
+    function updateLogoutButtonColor() {
+        if ($(window).scrollTop() > 50) {
+            $('#btn-logout').css('background-color', '#dc3545'); // merah saat discroll
+        } else {
+            $('#btn-logout').css('background-color', 'blue'); // biru saat diatas tombol
+        }
+    }
+
+    // Panggil fungsi saat halaman dimuat
+    $(document).ready(function() {
+        updateLogoutButtonColor();
+    });
+
+    // Panggil fungsi saat scroll
+    $(window).scroll(function () {
+        updateLogoutButtonColor();
+    });
     
 })(jQuery);
-

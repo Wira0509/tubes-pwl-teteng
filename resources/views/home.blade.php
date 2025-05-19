@@ -59,7 +59,19 @@
                         <a href="{{ route('about') }}" class="nav-item nav-link mx-5">About</a>
                         <a href="{{ route('ourteam') }}" class="nav-item nav-link mx-5">Our Team</a>
                     </div>
-                    <a href="" class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Get Started</a>
+<a href="" id="btn-get-started" class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Get Started</a>
+<form method="POST" action="{{ route('logout') }}" class="d-inline ms-2">
+    @csrf
+                <style>
+                    #btn-logout:hover {
+                        background-color: blue !important;
+                        color: white !important;
+                    }
+                </style>
+                <button id="btn-logout" type="submit" class="btn rounded-pill py-2 px-4 d-none d-lg-inline-block" style="background-color: #dc3545; color: white; border: none;">
+                    Logout
+                </button>
+</form>
                 </div>
             </nav>
 

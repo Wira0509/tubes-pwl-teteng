@@ -69,7 +69,7 @@
                         </div> -->
                         <!-- <a href="contact.html" class="nav-item nav-link">Contact</a> -->
                     </div>
-                    <a href="" class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Get Started</a>
+<a href="" id="btn-get-started" class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Get Started</a>
                 </div>
             </nav>
 

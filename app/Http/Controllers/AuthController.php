@@ -24,11 +24,17 @@ class AuthController extends Controller
     // Proses pendaftaran
     public function register(Request $request)
     {
-        $request->validate([
+        $validator = \Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|string|min:6|confirmed',
         ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('auth.form')
+                ->withErrors($validator, 'register')
+                ->withInput();
+        }
 
         $user = User::create([
             'name' => $request->name,
@@ -36,22 +42,28 @@ class AuthController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('auth.form')->with('success', 'Registrasi berhasil. Silakan login.');
+        return redirect()->route('auth.form')->with('success', 'Registrasi berhasil. Silahkan login.');
     }
 
     // Tampilkan form login
     public function showLoginForm()
     {
-        return view('login');
+        return view('loginandregister');
     }
 
     // Proses login
     public function login(Request $request)
     {
-        $request->validate([
+        $validator = \Validator::make($request->all(), [
             'email' => 'required|email',
             'password' => 'required|string',
         ]);
+
+        if ($validator->fails()) {
+            return redirect()->route('auth.form')
+                ->withErrors($validator, 'login')
+                ->withInput();
+        }
 
         $user = User::where('email', $request->email)->first();
 
@@ -62,7 +74,9 @@ class AuthController extends Controller
 
             return redirect()->route('home');
         } else {
-            return back()->withErrors(['email' => 'Email atau password salah'])->withInput();
+            return redirect()->route('auth.form')
+                ->withErrors(['email' => 'Email atau password salah. Silahkan coba lagi.'], 'login')
+                ->withInput();
         }
     }
 

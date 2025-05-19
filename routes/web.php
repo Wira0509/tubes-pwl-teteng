@@ -17,23 +17,18 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/home', function () {
-    if (!session()->has('user_id')) {
-        return redirect()->route('login');
-    }
-    return view('home');
-})->name('home');
+use App\Http\Middleware\CheckAuthOr404;
 
-Route::get('/home', function () {
-    return view('home');
-})->name('home');
+Route::middleware([CheckAuthOr404::class])->group(function () {
+    Route::get('/home', function () {
+        return view('home');
+    })->name('home');
 
-Route::get('/about', function(){
-    return view('about');
-})->name('about');
+    Route::get('/about', function(){
+        return view('about');
+    })->name('about');
 
-Route::get('/ourteam', function(){
-    return view('ourteam');
-})->name('ourteam');
-
-
+    Route::get('/ourteam', function(){
+        return view('ourteam');
+    })->name('ourteam');
+});
