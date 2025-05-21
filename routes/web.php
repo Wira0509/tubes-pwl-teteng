@@ -11,7 +11,7 @@ Route::get('/about', function(){
     return view('about');
 })->name('about');
 
-Route::get('/ourteam', function(){
+Route::get('/ourteam', function() {
     return view('ourteam');
 })->name('ourteam');
 
@@ -20,7 +20,7 @@ Route::get('/login', function () {
 });
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 Route::get('/dashboard', function () {
@@ -34,15 +34,3 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
-
-Route::get('/home', function () {
-    return view('home');
-})->name('home');
-
-Route::get('/about', function(){
-    return view('about');
-})->name('about');
-
-Route::get('/ourteam', function(){
-    return view('ourteam');
-})->name('ourteam');

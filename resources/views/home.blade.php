@@ -60,9 +60,41 @@
                         <a href="{{ route('about') }}" class="nav-item nav-link mx-5">About</a>
                         <a href="{{ route('ourteam') }}" class="nav-item nav-link mx-5">Our Team</a>
                     </div>
-                    <a href="" class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Get Started</a>
+                    <!-- <a href="" class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Get Started</a> -->
                 </div>
-            </nav>
+
+                <header class="w-full lg:max-w-4xl max-w-[335px] text-sm mb-6 not-has-[nav]:hidden">
+                    @if (Route::has('login'))
+                <nav class="flex items-center justify-end gap-4">
+                @auth
+                <a
+                href="{{ url('/dashboard') }}"
+                class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal"
+                >
+                Dashboard
+                </a>
+                @else
+                <a
+                href="{{ route('login') }}"
+                class="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full py-2 px-4"
+                >
+                Log in
+                </a>
+
+                @if (Route::has('register'))
+                <a
+                href="{{ route('register') }}"
+                class="bg-green-600 hover:bg-green-700 text-white font-semibold rounded-full py-2 px-4"
+                >
+                Register
+                </a>
+                @endif
+                @endauth
+                </nav>
+                @endif
+                </header>
+                
+                </nav>
 
             <div class="container-fluid bg-primary hero-header background-transition-header">
                 <div class="container px-lg-5">
