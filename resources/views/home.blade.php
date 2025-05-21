@@ -63,38 +63,40 @@
                     <!-- <a href="" class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Get Started</a> -->
                 </div>
 
-                <header class="w-full lg:max-w-4xl max-w-[335px] text-sm mb-6 not-has-[nav]:hidden">
-                    @if (Route::has('login'))
-                <nav class="flex items-center justify-end gap-4">
-                @auth
-                <a
-                href="{{ url('/dashboard') }}"
-                class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal"
-                >
-                Dashboard
-                </a>
-                @else
-                <a
+               @if (Route::has('login'))
+<nav class="flex items-center justify-end gap-4">
+    @auth
+        <a
+            href="{{ url('/dashboard') }}"
+            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal"
+        >
+            Dashboard
+        </a>
+    @else
+        <div class="flex items-center gap-3"> <!-- Tambahkan container flex untuk grouping -->
+            <a
                 href="{{ route('login') }}"
-                class="bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-full py-2 px-4"
-                >
-                Log in
-                </a>
+                class="btn rounded-sm py-1.5 px-4 border dark:border-[#3E3E3A] dark:hover:border-[#62605b] transition-colors text-[#1b1b18] dark:text-[#EDEDEC] text-sm"
+            >
+                LOGIN
+            </a>
 
-                @if (Route::has('register'))
+            @if (Route::has('register'))
                 <a
-                href="{{ route('register') }}"
-                class="bg-green-600 hover:bg-green-700 text-white font-semibold rounded-full py-2 px-4"
+                    href="{{ route('register') }}"
+                    class="btn rounded-sm py-1.5 px-4 border dark:border-[#3E3E3A] dark:hover:border-[#62605b] transition-colors text-[#1b1b18] dark:text-[#EDEDEC] text-sm bg-[#f3f3f2] dark:bg-[#2A2A26] hover:bg-[#e8e8e6] dark:hover:bg-[#353531]"
                 >
-                Register
+                    REGISTER
                 </a>
-                @endif
-                @endauth
-                </nav>
-                @endif
-                </header>
-                
-                </nav>
+            @endif
+        </div>
+    @endauth
+</nav>
+@endif
+</header>
+
+
+            </nav>
 
             <div class="container-fluid bg-primary hero-header background-transition-header">
                 <div class="container px-lg-5">
