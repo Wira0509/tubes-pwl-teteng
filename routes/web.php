@@ -17,6 +17,8 @@ Route::get('/ourteam', function(){
 
 Route::get('/login', function () {
     return view('login');
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -31,5 +33,5 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
 require __DIR__.'/auth.php';
+
