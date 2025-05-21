@@ -66,27 +66,24 @@
                @if (Route::has('login'))
 <nav class="flex items-center justify-end gap-4">
     @auth
-        <a
-            href="{{ url('/dashboard') }}"
-            class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block"
-        >
+        <a href="{{ url('/dashboard') }}" class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block bg-secondary">
             Dashboard
         </a>
     @else
         <div class="navbar-nav"> <!-- Tambahkan container flex untuk grouping -->
             <a
                 href="{{ route('login') }}"
-                class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block"
+                class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block bg-warning"
             >
-                LOGIN
+                Login
             </a>
 
             @if (Route::has('register'))
                 <a
                     href="{{ route('register') }}"
-                    class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block"
+                    class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block bg-info"
                 >
-                    REGISTER
+                    Register
                 </a>
             @endif
         </div>
