@@ -6,6 +6,9 @@
     --dark: #04000B;
 }
 
+.bg-secondary {
+    color: #FBA504;
+}
 
 /*** Spinner ***/
 #spinner {

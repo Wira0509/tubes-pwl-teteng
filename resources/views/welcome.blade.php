@@ -68,15 +68,15 @@
     @auth
         <a
             href="{{ url('/dashboard') }}"
-            class="inline-block px-5 py-1.5 dark:text-[#EDEDEC] border-[#19140035] hover:border-[#1915014a] border text-[#1b1b18] dark:border-[#3E3E3A] dark:hover:border-[#62605b] rounded-sm text-sm leading-normal"
+            class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block"
         >
             Dashboard
         </a>
     @else
-        <div class="flex items-center gap-3"> <!-- Tambahkan container flex untuk grouping -->
+        <div class="navbar-nav"> <!-- Tambahkan container flex untuk grouping -->
             <a
                 href="{{ route('login') }}"
-                class="btn rounded-sm py-1.5 px-4 border dark:border-[#3E3E3A] dark:hover:border-[#62605b] transition-colors text-[#1b1b18] dark:text-[#EDEDEC] text-sm"
+                class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block"
             >
                 LOGIN
             </a>
@@ -84,7 +84,7 @@
             @if (Route::has('register'))
                 <a
                     href="{{ route('register') }}"
-                    class="btn rounded-sm py-1.5 px-4 border dark:border-[#3E3E3A] dark:hover:border-[#62605b] transition-colors text-[#1b1b18] dark:text-[#EDEDEC] text-sm bg-[#f3f3f2] dark:bg-[#2A2A26] hover:bg-[#e8e8e6] dark:hover:bg-[#353531]"
+                    class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block"
                 >
                     REGISTER
                 </a>
@@ -146,7 +146,7 @@
 
 
         <!-- Facts Start -->
-        <div class="container-xxl py-5">
+        <div class="container-fluid py-5">
             <div class="container py-5 px-lg-5">
                 <div class="row g-5 align-items-center">
                     <div class="col-lg-6 wow fadeInUp" data-wow-delay="0.1s">
