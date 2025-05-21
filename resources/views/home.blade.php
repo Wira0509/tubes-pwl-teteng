@@ -60,8 +60,42 @@
                         <a href="{{ route('about') }}" class="nav-item nav-link mx-5">About</a>
                         <a href="{{ route('ourteam') }}" class="nav-item nav-link mx-5">Our Team</a>
                     </div>
-                    <a href="" class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Get Started</a>
+                    <!-- <a href="" class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Get Started</a> -->
                 </div>
+
+               @if (Route::has('login'))
+<nav class="flex items-center justify-end gap-4">
+    @auth
+        <a
+            href="{{ url('/dashboard') }}"
+            class="btn rounded-sm py-1.5 px-4 border dark:border-[#3E3E3A] dark:hover:border-[#62605b] transition-colors text-[#1b1b18] dark:text-[#EDEDEC] text-sm"
+        >
+            DASHBOARD
+        </a>
+    @else
+        <div class="flex items-center gap-3"> <!-- Tambahkan container flex untuk grouping -->
+            <a
+                href="{{ route('login') }}"
+                class="btn rounded-sm py-1.5 px-4 border dark:border-[#3E3E3A] dark:hover:border-[#62605b] transition-colors text-[#1b1b18] dark:text-[#EDEDEC] text-sm"
+            >
+                LOGIN
+            </a>
+
+            @if (Route::has('register'))
+                <a
+                    href="{{ route('register') }}"
+                    class="btn rounded-sm py-1.5 px-4 border dark:border-[#3E3E3A] dark:hover:border-[#62605b] transition-colors text-[#1b1b18] dark:text-[#EDEDEC] text-sm bg-[#f3f3f2] dark:bg-[#2A2A26] hover:bg-[#e8e8e6] dark:hover:bg-[#353531]"
+                >
+                    REGISTER
+                </a>
+            @endif
+        </div>
+    @endauth
+</nav>
+@endif
+</header>
+
+
             </nav>
 
             <div class="container-fluid bg-primary hero-header background-transition-header">
