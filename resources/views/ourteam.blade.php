@@ -43,8 +43,8 @@
         <!-- Spinner End -->
 
 
-        <!-- Navbar & Hero Start -->
-        <div class="container-fluid position-relative p-0">
+       <!-- Navbar & Hero Start -->
+       <div class="container-fluid position-relative p-0">
             <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
                 <a href="" class="navbar-brand p-0">
                     <h1 class="m-0">TetengFinance.</h1>
@@ -55,16 +55,59 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav mx-auto py-0">
-                        <a href="{{ route('home') }}" class="nav-item nav-link mx-5">Home</a>
+                        <a href="{{ route('home') }}" class="nav-item nav-link active mx-5">Home</a>
                         <a href="{{ route('about') }}" class="nav-item nav-link mx-5">About</a>
-                        <a href="{{ route('ourteam') }}" class="nav-item nav-link active mx-5">Our Team</a>
+                        <a href="{{ route('ourteam') }}" class="nav-item nav-link mx-5">Our Team</a>
                     </div>
-                    <a href="" class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Get Started</a>
+                    <!-- <a href="" class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Get Started</a> -->
                 </div>
+
+               @if (Route::has('login'))
+<nav class="flex items-center justify-end gap-4">
+    @auth
+        <a href="{{ url('/dashboard') }}" class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block bg-secondary">
+            Dashboard
+        </a>
+    @else
+        <div class="navbar-nav"> <!-- Tambahkan container flex untuk grouping -->
+            <a
+                href="{{ route('login') }}"
+                class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block bg-warning"
+            >
+                Login
+            </a>
+
+            @if (Route::has('register'))
+                <a
+                    href="{{ route('register') }}"
+                    class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block bg-info"
+                >
+                    Register
+                </a>
+            @endif
+            </div>
+        @endauth
+        </nav>
+        @endif
+        </header>
+
+
             </nav>
 
+            <div class="container-fluid bg-primary hero-header background-transition-header">
+                <div class="container px-lg-5">
+                    <div class="row g-5 align-items-end">
+                        <div class="col-lg-6 text-center text-lg-start">
+                            <h1 class="text-white animated slideInDown" style="padding-bottom: 7.5rem; font-size: 50px;">Smart Money Management, <br>Made Simple.</h1>
+                        </div>
+                        <div class="col-lg-6 text-center text-lg-start mt-6">
+                            <img class="img-fluid animated zoomIn" src="img/hero.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- Navbar End -->
+        <!-- Navbar & Hero End -->
 
         <!-- Main Start -->
         <div class="container-fluid py-5 bg-primary hero-header background-transition-header">

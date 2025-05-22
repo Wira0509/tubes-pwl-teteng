@@ -86,11 +86,11 @@
                     Register
                 </a>
             @endif
-        </div>
-    @endauth
-</nav>
-@endif
-</header>
+            </div>
+        @endauth
+        </nav>
+        @endif
+        </header>
 
 
             </nav>
