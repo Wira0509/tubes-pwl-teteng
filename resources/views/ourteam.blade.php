@@ -55,9 +55,9 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav mx-auto py-0">
-                        <a href="{{ route('home') }}" class="nav-item nav-link active mx-5">Home</a>
+                        <a href="{{ route('home') }}" class="nav-item nav-link mx-5">Home</a>
                         <a href="{{ route('about') }}" class="nav-item nav-link mx-5">About</a>
-                        <a href="{{ route('ourteam') }}" class="nav-item nav-link mx-5">Our Team</a>
+                        <a href="{{ route('ourteam') }}" class="nav-item nav-link mx-5 active">Our Team</a>
                     </div>
                     <!-- <a href="" class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Get Started</a> -->
                 </div>
@@ -93,20 +93,6 @@
 
 
             </nav>
-
-            <div class="container-fluid bg-primary hero-header background-transition-header">
-                <div class="container px-lg-5">
-                    <div class="row g-5 align-items-end">
-                        <div class="col-lg-6 text-center text-lg-start">
-                            <h1 class="text-white animated slideInDown" style="padding-bottom: 7.5rem; font-size: 50px;">Smart Money Management, <br>Made Simple.</h1>
-                        </div>
-                        <div class="col-lg-6 text-center text-lg-start mt-6">
-                            <img class="img-fluid animated zoomIn" src="img/hero.png" alt="">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
         <!-- Navbar & Hero End -->
 
         <!-- Main Start -->
