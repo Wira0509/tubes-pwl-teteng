@@ -17,7 +17,7 @@ Membantu individu atau bisnis kecil dalam mengelola keuangan secara efektif deng
 
 Lorem Ipsum
 
-### Teknologi Yang Dipakai
+## Teknologi Yang Dipakai
 
 - **[Vehikl](https://vehikl.com)**
 - **[Tighten Co.](https://tighten.co)**
@@ -30,8 +30,8 @@ Lorem Ipsum
 
 ## Library Yang Dipakai
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Mari Mas
 
 ## Tata Cara Menjalankan Aplikasi
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+Mari Mas
