@@ -16,7 +16,21 @@ Membantu individu atau bisnis kecil dalam mengelola keuangan secara efektif deng
 ## Deskrispi Modul Fitur
 
 - ### Login & Register
-Pengguna dapat membuat akun terlebih dahulu sebelum masuk ke halaman utama.
+Pengguna harus mendaftarkan diri terlebih dahulu di register page dan masuk melalui login page agar bisa mengakses halaman utama.
+- ### Level User
+Membagi hak akses web menjadi dua yaitu user dan admin
+- ### Hash Password
+Menyimpan sandi ke database dengan mengubahnya menjadi karakter acak agar tidak terjadi hal yang tidak diinginkan.
+- ### Dashboard User
+User dapat melihat statistik keuangan nya dari halaman dashboard sepeti seberapa banyak pemasukan dan pengeluaran nya pada bulan itu.
+- ### Filtering
+Menampilkan data sesuai dengan keinginan user.
+- ### Analisis Keuangan
+Menampilkan data berupa grafik.
+- ### CRUD
+Memberikan akses agar user ataupun admin bisa membuat (Create), membaca (Read), memperbaharui (Update), dan menghapus (Delete) data-data yang ada di web tersebut jika memungkinkan.
+- ### Download Laporan 
+Riwayat Transaksi pemasukan dan pengeluaran dapat didownload berupa file .pdf atau spreadsheet.
 
 ## Teknologi Yang Dipakai
 
