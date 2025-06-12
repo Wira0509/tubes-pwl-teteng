@@ -15,18 +15,15 @@ Membantu individu atau bisnis kecil dalam mengelola keuangan secara efektif deng
 
 ## Deskrispi Modul Fitur
 
-Lorem Ipsum
+# Login & Register
+Pengguna dapat membuat akun terlebih dahulu sebelum masuk ke halaman utama.
 
 ## Teknologi Yang Dipakai
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+- **[Laravel 12](https://laravel.com)**
+- **[Laravel Breeze](https://laravel.com/docs/10.x/starter-kits#laravel-breeze)**
+- **[Laravel Filament](https://filamentphp.com/)**
+- **[Laravel Trend](https://madewithlaravel.com/laravel-trend)**
 
 ## Library Yang Dipakai
 
