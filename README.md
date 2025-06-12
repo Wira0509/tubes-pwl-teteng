@@ -48,4 +48,5 @@ Riwayat Transaksi pemasukan dan pengeluaran dapat didownload berupa file .pdf at
 
 ## Tata Cara Menjalankan Aplikasi
 
-1. Pergi 
+1. Salin link repo ini https://github.com/Wira0509/tubes-pwl-teteng
+2. Buka terminal dan jalankan perintah git clone https://github.com/Wira0509/tubes-pwl-teteng
