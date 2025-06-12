@@ -15,7 +15,7 @@ Membantu individu atau bisnis kecil dalam mengelola keuangan secara efektif deng
 
 ## Deskrispi Modul Fitur
 
-# Login & Register
+### Login & Register
 Pengguna dapat membuat akun terlebih dahulu sebelum masuk ke halaman utama.
 
 ## Teknologi Yang Dipakai
