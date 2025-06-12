@@ -49,7 +49,7 @@ Riwayat Transaksi pemasukan dan pengeluaran dapat didownload berupa file .pdf at
 
 ## Tata Cara Menjalankan Aplikasi
 
-1. Salin link repo ini [https://github.com/Wira0509/tubes-pwl-teteng](https://github.com/Wira0509/tubes-pwl-teteng.git)
+1. Salin link repo ini https://github.com/Wira0509/tubes-pwl-teteng.git
 2. Buka VSCode
 3. Pergi ke bagian terminal yang ada di vscode, pastikan direktori nya sudah sesuai (jika pengguna laragon berada pada folder www, dan jika pengguna xampp berada pada folder htdocs)
 4. jalankan perintah git clone https://github.com/Wira0509/tubes-pwl-teteng.git untuk menduplikasi proyek dari GitHub ke komputer/laptop anda
