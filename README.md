@@ -11,7 +11,7 @@ Anggota Kelompok 8 :
 
 ## Deskripsi Aplikasi
 
-Membantu individu atau bisnis kecil dalam mengelola keuangan secara efektif dengan memberikan solusi pencatatan keuangan yang mudah.
+Teteng Finance adalah sebuah aplikasi web yang berfungsi untuk membantu individu, pengusaha mikro, dan bisnis skala kecil dalam mengelola keuangan mereka secara efektif dengan menawarkan solusi pencatatan keuangan praktis. Solusi ini memudahkan pelacakan pemasukan-pengeluaran, serta pengorganisasian transaksi secara langsung.
 
 ## Deskrispi Modul Fitur
 
@@ -34,15 +34,18 @@ Riwayat Transaksi pemasukan dan pengeluaran dapat didownload berupa file .pdf at
 
 ## Teknologi Yang Dipakai
 
-- **[Laravel 12](https://laravel.com)**
-- **[Laravel Breeze](https://laravel.com/docs/10.x/starter-kits#laravel-breeze)**
-- **[Laravel Filament](https://filamentphp.com/)**
-- **[Laravel Trend](https://madewithlaravel.com/laravel-trend)**
+- ### Laravel 12
+- ### Github
+- ### MySQL
+- ### Laragon
+- ### VSCode
 
 ## Library Yang Dipakai
 
-Mari Mas
+- ### Laravel Breeze
+- ### Laravel Filament
+- ### Laravel Trend
 
 ## Tata Cara Menjalankan Aplikasi
 
-Mari Mas
+1. Pergi 
