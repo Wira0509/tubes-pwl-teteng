@@ -55,9 +55,11 @@ Riwayat Transaksi pemasukan dan pengeluaran dapat didownload berupa file .pdf at
 4. jalankan perintah git clone https://github.com/Wira0509/tubes-pwl-teteng.git untuk menduplikasi proyek dari GitHub ke komputer/laptop anda
 5. Buat file .env dengan perintah cp .env.example .env, masuk kedalam file .env yang sudah dibuat tadi
 6. Pada line 24-28 silahkan blok kode tersebut dan tekan ctrl+/ agar menguncomment kode tersebut.
-7. Jalankan perintah composer install untuk menginstal semua package yang dibutuhkan proyek, laravel menggunakan composer sebagai depedency manager.
-8. Laravel membutuhkan application key agar enskripsi befungsi dengan baik, jalankan perintah php artisan key:generate
-9. Karena web kami menggunakan library filament jadi install terlebih dahulu package filamentnya, silahkan jalankan perintah composer require filament/filament:"^3.3" -W agar package filament terinstall di perangkata anda
-10. Dan juga kami memakai library laravel trend untuk penampilan data, jalankan perintah composer require flowframe/laravel-trend di terminal agar laravel trend terinstall.
-11. Jalankan perintah php artisan migrate agar tabel-tabel yang diperlukan terinstall didatabase.
-12. Terakhir jalankan perintah php artisan serve agar diarahkan ke sebuah link yang bisa dibuka di website untuk mengakses web ini.
+7. Pada line 5 ganti app_url menjadi http://127.0.0.1:8000
+8. Jalankan perintah composer install untuk menginstal semua package yang dibutuhkan proyek, laravel menggunakan composer sebagai depedency manager.
+9. Laravel membutuhkan application key agar enskripsi befungsi dengan baik, jalankan perintah php artisan key:generate
+10. Karena web kami menggunakan library filament jadi install terlebih dahulu package filamentnya, silahkan jalankan perintah composer require filament/filament:"^3.3" -W agar package filament terinstall di perangkata anda
+11. Dan juga kami memakai library laravel trend untuk penampilan data, jalankan perintah composer require flowframe/laravel-trend di terminal agar laravel trend terinstall.
+12. Jalankan perintah php artisan migrate agar tabel-tabel yang diperlukan terinstall didatabase.
+13. Jalankan perintah php artisan storage:link untuk membuat symbolic link (tautan simbolis) antara direktori public/storage dan storage/app/public
+14. Terakhir jalankan perintah php artisan serve agar diarahkan ke sebuah link yang bisa dibuka di website untuk mengakses web ini.
