@@ -39,12 +39,20 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'role' => 'user', // set default role explicitly
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        // Redirect based on role
+        if ($user->role === 'user') {
+            return redirect('/user'); // update to correct Filament dashboard path
+        } elseif ($user->role === 'admin') {
+            return redirect(route('dashboard', absolute: false));
+        } else {
+            return redirect(route('dashboard', absolute: false));
+        }
     }
 }

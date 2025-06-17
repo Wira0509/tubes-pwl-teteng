@@ -66,9 +66,15 @@
                @if (Route::has('login'))
 <nav class="flex items-center justify-end gap-4">
     @auth
-        <a href="{{ url('/dashboard') }}" class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block bg-secondary">
-            Dashboard
-        </a>
+        @if(auth()->user()->role === 'admin')
+            <a href="{{ url('/admin/dashboard') }}" class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block bg-secondary">
+                Dashboard
+            </a>
+        @elseif(auth()->user()->role === 'user')
+            <a href="{{ url('/user') }}" class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block bg-secondary">
+                Dashboard
+            </a>
+        @endif
     @else
         <div class="navbar-nav"> <!-- Tambahkan container flex untuk grouping -->
             <a
