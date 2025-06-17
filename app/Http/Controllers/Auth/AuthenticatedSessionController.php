@@ -8,6 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Illuminate\Validation\ValidationException;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -22,14 +23,32 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
-    {
-        $request->authenticate();
+    public function store(Request $request): RedirectResponse
+{
+    $request->validate([
+        'email' => 'required|email',
+        'password' => 'required',
+    ]);
 
-        $request->session()->regenerate();
-
-        return redirect()->intended(route('welcome', absolute: false));
+    if (! Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
+        throw ValidationException::withMessages([
+            'email' => trans('auth.failed'),
+        ]);
     }
+
+    $request->session()->regenerate();
+
+    // ✅ Cek peran user setelah login
+    $user = Auth::user();
+
+    // Misalnya kamu menyimpan peran di kolom "role"
+    if ($user->role === 'admin') {
+        return redirect('/dashboard'); // Halaman dashboard breeze
+    }
+
+    return redirect('/user'); // Halaman Filament
+}
+
 
     /**
      * Destroy an authenticated session.
