@@ -43,7 +43,7 @@ class AuthenticatedSessionController extends Controller
 
     // Misalnya kamu menyimpan peran di kolom "role"
     if ($user->role === 'admin') {
-        return redirect('/dashboard'); // Halaman dashboard breeze
+        return redirect('/admin/dashboard'); // Perbaiki redirect ke dashboard admin
     }
 
     return redirect('/user'); // Halaman Filament

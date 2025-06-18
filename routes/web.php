@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\TransactionExportController;
 
 Route::get('/home', function () {
@@ -32,6 +33,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::get('/admin/dashboard', [AdminDashboardController::class, 'index'])->name('admin.dashboard');
 });
 
 Route::get('/admin/login', function () {
@@ -42,4 +45,9 @@ Route::get('/transactions/export/pdf', [TransactionExportController::class, 'exp
 
 
 require __DIR__.'/auth.php';
+
+Route::get('/debug/users', function () {
+    $users = \App\Models\User::where('role', 'user')->get();
+    return $users;
+});
 

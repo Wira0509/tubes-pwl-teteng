@@ -22,7 +22,19 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'role',
     ];
+
+    /**
+     * Scope a query to only include users with role 'user'.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeUserRole($query)
+    {
+        return $query->where('role', 'user');
+    }
 
     /**
      * The attributes that should be hidden for serialization.
