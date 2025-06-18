@@ -27,16 +27,28 @@ class AdminPanelProvider extends PanelProvider
             ->path('user')
             // ->login() ← HAPUS baris ini agar login bawaan Filament tidak digunakan
             ->colors([
-                'primary' => Color::Amber,
+                'danger' => Color::Rose,
+                'gray' => Color::Gray,
+                'info' => Color::Blue,
+                'primary' => Color::Indigo,
+                'success' => Color::Emerald,
+                'warning' => Color::Orange,
             ])
+            ->font('Poppins')
             ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
             ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
             ->pages([])
             ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
             ->widgets([
-                Widgets\AccountWidget::class,
-                Widgets\FilamentInfoWidget::class,
+                \App\Filament\Widgets\CustomAccountWidget::class,
             ])
+
+            ->brandLogo(asset('img/logo-horizontal-2.png'))
+            ->brandLogoHeight('6rem')
+
+            ->topNavigation()
+            ->darkMode(false)
+
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,

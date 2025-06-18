@@ -26,6 +26,12 @@ class ListTransactions extends ListRecords
                 ->color('danger')
                 ->icon('heroicon-m-document-text')
                 ->url(route('transactions.export.pdf'), shouldOpenInNewTab: true),
+
+            Action::make('New Transactions')
+                ->label('New Transactions')
+                ->color('primary')
+                ->icon('heroicon-m-plus')
+                ->url('/user/transactions/create'),
         ];
     }
 }

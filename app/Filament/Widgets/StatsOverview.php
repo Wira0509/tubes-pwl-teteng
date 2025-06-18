@@ -32,15 +32,15 @@ class StatsOverview extends BaseWidget
         ->sum('amount');
 
      return [
-        Stat::make('Pemasukan', $pemasukan)
+        Stat::make('Pemasukan', 'Rp ' . number_format($pemasukan, 2, ',', '.'))
             ->description('32k increase')
             ->descriptionIcon('heroicon-m-arrow-trending-up')
             ->color('success'),
-        Stat::make('Pengeluaran', $pengeluaran)
+        Stat::make('Pengeluaran', 'Rp ' . number_format($pengeluaran, 2, ',', '.'))
             ->description('7% increase')
             ->descriptionIcon('heroicon-m-arrow-trending-down')
             ->color('danger'),
-        Stat::make('Selisih', $pemasukan - $pengeluaran)    
+        Stat::make('Selisih', 'Rp ' . number_format($pemasukan - $pengeluaran, 2, ',', '.'))    
             ->description('3% increase')
             ->descriptionIcon('heroicon-m-arrow-trending-up')
             ->color('success'),
