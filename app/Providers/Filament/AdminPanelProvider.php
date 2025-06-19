@@ -2,9 +2,11 @@
 
 namespace App\Providers\Filament;
 
+use App\Livewire\NotificationBell;
 use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
+use Filament\Navigation\NavigationItem;
 use Filament\Pages;
 use Filament\Panel;
 use Filament\PanelProvider;
@@ -17,6 +19,9 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 
+use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
+use Joaopaulolndev\FilamentEditProfile\Pages\EditProfilePage;
+use Filament\Navigation\MenuItem;
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -45,9 +50,23 @@ class AdminPanelProvider extends PanelProvider
 
             ->brandLogo(asset('img/logo-horizontal-2.png'))
             ->brandLogoHeight('6rem')
-
             ->topNavigation()
             ->darkMode(false)
+
+
+            // Plugins Start
+            ->plugins([
+                FilamentEditProfilePlugin::make()
+                    ->setIcon('heroicon-s-user')
+                    ->shouldShowAvatarForm()
+            ])
+            ->userMenuItems([
+                MenuItem::make()
+                    ->label('Edit Profile')
+                    ->url(fn (): string => EditProfilePage::getUrl())
+                    ->icon('heroicon-s-user')
+            ])
+            // Plugins End
 
             ->middleware([
                 EncryptCookies::class,

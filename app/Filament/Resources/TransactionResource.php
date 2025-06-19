@@ -12,12 +12,13 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use PhpParser\Node\Stmt\Label;
 
 class TransactionResource extends Resource
 {
     protected static ?string $model = Transaction::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-s-rectangle-stack';
 
     public static function form(Form $form): Form
     {
@@ -47,19 +48,28 @@ class TransactionResource extends Resource
     {
         return $table
             ->columns([
-                 Tables\Columns\ImageColumn::make('image')
-                    ->sortable(),
+                Tables\Columns\ImageColumn::make('category.image'),
                 Tables\Columns\TextColumn::make('category.name')
                     ->description(fn (Transaction $record): string => $record->name)
-                    ->label('Transaksi')
+                    ->label('Transactions')
                     ->searchable(),
-                Tables\Columns\IconColumn::make('category.is_expense')
-                     ->trueIcon('heroicon-o-arrow-long-up')
-                     ->falseIcon('heroicon-o-arrow-long-down')
-                     ->label('Pengeluaran / Pemasukan')
-                     ->trueColor('danger')
-                     ->falseColor('success')
-                     ->boolean(),
+                Tables\Columns\TextColumn::make('type_label')
+                    ->label('Income / Expense')
+                    ->html()
+                    ->getStateUsing(function (Transaction $record) {
+                        // Ambil dari relasi category
+                        $isExpense = optional($record->category)->is_expense;
+                        $label = $isExpense ? 'Expense' : 'Income';
+                        $icon = $isExpense
+                                ? '<svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-4 h-4 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7-7-7" />
+                                </svg>'
+                                : '<svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-4 h-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7 7 7" />
+                                </svg>';
+                            return new \Illuminate\Support\HtmlString("<div class='flex items-center justify-center gap-1'>{$label}{$icon}</div>");
+                    })
+                    ->alignment('center'),            
                 Tables\Columns\TextColumn::make('date_transaction')
                     ->label("Tanggal")
                     ->date()

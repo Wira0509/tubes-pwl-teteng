@@ -16,34 +16,73 @@ class StatsOverview extends BaseWidget
         
         $firstDate = Transaction::orderBy('date_transaction')->value('date_transaction');
 
-        $startDate = isset($this->filters['startDate']) && $this->filters['startDate']
-            ? Carbon::parse($this->filters['startDate'])
-            : ($firstDate ? Carbon::parse($firstDate) : now()->startOfMonth());
+    $startDate = isset($this->filters['startDate']) && $this->filters['startDate']
+        ? Carbon::parse($this->filters['startDate'])
+        : ($firstDate ? Carbon::parse($firstDate) : now()->startOfMonth());
 
-        $endDate = isset($this->filters['endDate']) && $this->filters['endDate']
-            ? Carbon::parse($this->filters['endDate'])
-            : now();
+    $endDate = isset($this->filters['endDate']) && $this->filters['endDate']
+        ? Carbon::parse($this->filters['endDate'])
+        : now();
 
-        $pemasukan = Transaction::incomes()
+    $range = $startDate->diffInDays($endDate);
+
+    // Periode sebelumnya
+    $previousStart = $startDate->copy()->subDays($range + 1);
+    $previousEnd = $startDate->copy()->subDay();
+
+    $currentIncome = Transaction::incomes()
         ->whereBetween('date_transaction', [$startDate, $endDate])
         ->sum('amount');
-        $pengeluaran = Transaction::expenses()
+
+    $previousIncome = Transaction::incomes()
+        ->whereBetween('date_transaction', [$previousStart, $previousEnd])
+        ->sum('amount');
+
+    $currentExpense = Transaction::expenses()
         ->whereBetween('date_transaction', [$startDate, $endDate])
         ->sum('amount');
 
-     return [
-        Stat::make('Pemasukan', 'Rp ' . number_format($pemasukan, 2, ',', '.'))
-            ->description('32k increase')
-            ->descriptionIcon('heroicon-m-arrow-trending-up')
-            ->color('success'),
-        Stat::make('Pengeluaran', 'Rp ' . number_format($pengeluaran, 2, ',', '.'))
-            ->description('7% increase')
-            ->descriptionIcon('heroicon-m-arrow-trending-down')
-            ->color('danger'),
-        Stat::make('Selisih', 'Rp ' . number_format($pemasukan - $pengeluaran, 2, ',', '.'))    
-            ->description('3% increase')
-            ->descriptionIcon('heroicon-m-arrow-trending-up')
-            ->color('success'),
-    ];
+    $previousExpense = Transaction::expenses()
+        ->whereBetween('date_transaction', [$previousStart, $previousEnd])
+        ->sum('amount');
+
+    // Selisih
+    $currentDiff = $currentIncome - $currentExpense;
+    $previousDiff = $previousIncome - $previousExpense;
+
+    // Fungsi format nominal
+    $formatRupiah = fn($value) => 'Rp ' . number_format(abs($value), 2, ',', '.');
+
+    // Hitung perbedaan
+    $incomeDiff = $currentIncome - $previousIncome;
+    $expenseDiff = $currentExpense - $previousExpense;
+    $diffDiff = $currentDiff - $previousDiff;
+
+    return [
+    // Pemasukan
+    Stat::make('Pemasukan', $formatRupiah($currentIncome))
+        ->description(
+            ($incomeDiff >= 0 ? '+' : '-') . $formatRupiah($incomeDiff) . ' ' . ($incomeDiff >= 0 ? 'increase' : 'decrease')
+        )
+        ->descriptionIcon($incomeDiff >= 0 ? 'heroicon-m-arrow-trending-up' : 'heroicon-m-arrow-trending-down')
+        ->color($incomeDiff >= 0 ? 'success' : 'danger'),
+
+    // Pengeluaran
+    Stat::make('Pengeluaran', $formatRupiah($currentExpense))
+        ->description(
+            ($expenseDiff >= 0 ? '+' : '-') . $formatRupiah($expenseDiff) . ' ' . ($expenseDiff >= 0 ? 'increase' : 'decrease')
+        )
+        ->descriptionIcon($expenseDiff >= 0 ? 'heroicon-m-arrow-trending-up' : 'heroicon-m-arrow-trending-down')
+        ->color($expenseDiff >= 0 ? 'danger' : 'success'), // ⬅️ Warna dibalik: naik = bahaya
+
+    // Selisih
+    Stat::make('Selisih', $formatRupiah($currentDiff))
+        ->description(
+            ($diffDiff >= 0 ? '+' : '-') . $formatRupiah($diffDiff) . ' ' . ($diffDiff >= 0 ? 'increase' : 'decrease')
+        )
+        ->descriptionIcon($diffDiff >= 0 ? 'heroicon-m-arrow-trending-up' : 'heroicon-m-arrow-trending-down')
+        ->color($diffDiff >= 0 ? 'success' : 'danger'), // ⬅️ Positif jika naik
+        ];
+
     }
 }

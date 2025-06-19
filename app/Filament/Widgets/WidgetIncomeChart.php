@@ -12,7 +12,7 @@ use Filament\Widgets\Concerns\InteractsWithPageFilters;
 class WidgetIncomeChart extends ChartWidget
 {
     use InteractsWithPageFilters;
-    protected static ?string $heading = 'Pemasukan';
+    protected static ?string $heading = 'Income';
     protected static string $color = 'success';
     protected function getData(): array
     {
@@ -39,7 +39,7 @@ class WidgetIncomeChart extends ChartWidget
     return [
         'datasets' => [
             [
-                'label' => 'Pemasukan',
+                'label' => 'Income',
                 'data' => $data->map(fn (TrendValue $value) => $value->aggregate),
             ],
         ],

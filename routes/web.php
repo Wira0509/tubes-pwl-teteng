@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\TransactionExportController;
+use Illuminate\Support\Facades\Storage;
+use App\Models\User;
 
 Route::get('/home', function () {
     return view('welcome');
@@ -47,7 +49,17 @@ Route::get('/transactions/export/pdf', [TransactionExportController::class, 'exp
 require __DIR__.'/auth.php';
 
 Route::get('/debug/users', function () {
-    $users = \App\Models\User::where('role', 'user')->get();
+    $users = User::where('role', 'user')->get();
     return $users;
 });
+
+Route::get('/avatar/{user}', function (User $user) {
+    $path = storage_path('app/private/' . $user->avatar_url);
+
+    if (!file_exists($path)) {
+        abort(404, 'Avatar file not found: ' . $path);
+    }
+
+    return response()->file($path);
+})->middleware('web')->name('avatar.view');
 

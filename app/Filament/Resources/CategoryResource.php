@@ -42,12 +42,12 @@ class CategoryResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\IconColumn::make('is_expense')
-                    ->label('Pengeluaran / Pemasukan')
-                     ->trueIcon('heroicon-o-arrow-long-up')
-                     ->falseIcon('heroicon-o-arrow-long-down')
-                     ->label('Pengeluaran')
-                     ->trueColor('danger')
-                     ->falseColor('success')
+                    ->alignment('center')
+                    ->label('Income / Expense')
+                    ->trueIcon('heroicon-s-arrow-trending-down')
+                    ->falseIcon('heroicon-s-arrow-trending-up')
+                    ->trueColor('danger')
+                    ->falseColor('success')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()

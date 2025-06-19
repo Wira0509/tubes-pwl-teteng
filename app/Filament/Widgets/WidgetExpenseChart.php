@@ -12,7 +12,7 @@ use Filament\Widgets\Concerns\InteractsWithPageFilters;
 class WidgetExpenseChart extends ChartWidget
 {
     use InteractsWithPageFilters;
-    protected static ?string $heading = 'Pengeluaran';
+    protected static ?string $heading = 'Expense';
     protected static string $color = 'danger';
     protected function getData(): array
     {
@@ -39,7 +39,7 @@ class WidgetExpenseChart extends ChartWidget
     return [
         'datasets' => [
             [
-                'label' => 'Pengeluaran',
+                'label' => 'Expense',
                 'data' => $data->map(fn (TrendValue $value) => $value->aggregate),
             ],
         ],
