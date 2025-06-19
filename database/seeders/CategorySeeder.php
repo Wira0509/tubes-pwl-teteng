@@ -26,7 +26,7 @@ class CategorySeeder extends Seeder
             [
                 'name' => 'Salary',
                 'is_expense' => false,
-                'image' => 'salary.png',
+                'image' => 'salary.gif',
             ],
             [
                 'name' => 'Entertainment',

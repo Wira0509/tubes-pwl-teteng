@@ -18,12 +18,20 @@ class Dashboard extends BaseDashboard
         return $form
             ->schema([
                 Section::make()
-                    ->schema([
-                        DatePicker::make('startDate')
-                            ->maxDate(fn (Get $get) => $get('endDate') ?: now()),
-                        DatePicker::make('endDate')
-                            ->minDate(fn (Get $get) => $get('startDate') ?: now())
-                            ->maxDate(now()),
+            ->schema([
+                 DatePicker::make('startDate')
+                ->label('Tanggal Mulai')
+                ->native(false) // Gunakan Flatpickr, bukan native browser datepicker
+                ->displayFormat('d F Y') // Tampilkan: 18 Juni 2025
+                ->maxDate(fn (Get $get) => $get('endDate') ?: now()),
+
+                DatePicker::make('endDate')
+                ->label('Tanggal Selesai')
+                ->native(false)
+                ->displayFormat('d F Y')
+                ->minDate(fn (Get $get) => $get('startDate') ?: now())
+                ->maxDate(now()),
+
                     ])
                     ->columns(2),
             ]);
