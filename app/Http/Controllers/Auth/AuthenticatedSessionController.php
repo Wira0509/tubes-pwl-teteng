@@ -38,12 +38,11 @@ class AuthenticatedSessionController extends Controller
 
     $request->session()->regenerate();
 
-    // ✅ Cek peran user setelah login
+    // Cek peran user setelah login
     $user = Auth::user();
 
-    // Misalnya kamu menyimpan peran di kolom "role"
     if ($user->role === 'admin') {
-        return redirect('/admin/dashboard'); // Perbaiki redirect ke dashboard admin
+        return redirect('/admin/dashboard'); //dashboard admin
     }
 
     return redirect('/user'); // Halaman Filament

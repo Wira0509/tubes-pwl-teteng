@@ -13,4 +13,9 @@ class Category extends Model
         'is_expense',
         'image'
     ];
+
+    public function transactions()
+    {   
+        return $this->hasMany(Transaction::class);
+    }
 }
