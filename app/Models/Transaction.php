@@ -10,12 +10,14 @@ class Transaction extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'user_id',
         'name',
         'category_id',
         'date_transaction',
         'amount',
         'note',
         'image',
+
     ];
 
     public function category(): BelongsTo
@@ -34,6 +36,14 @@ class Transaction extends Model
         return$query->whereHas('category',function ($query) {
             $query->where('is_expense',false);
         });
+    }
+
+    /**
+     * Mendapatkan user pemilik transaksi.
+     */
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
     }
 
 }

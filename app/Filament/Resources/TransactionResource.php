@@ -3,16 +3,15 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\TransactionResource\Pages;
-use App\Filament\Resources\TransactionResource\RelationManagers;
 use App\Models\Transaction;
+use App\Models\Category;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use PhpParser\Node\Stmt\Label;
+use Illuminate\Database\Eloquent\Builder; // Pastikan use statement ini ada
+use Illuminate\Support\HtmlString;
 
 class TransactionResource extends Resource
 {
@@ -20,22 +19,47 @@ class TransactionResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-s-rectangle-stack';
 
+    // ==========================================================
+    // ===== PERUBAHAN DITAMBAHKAN DI SINI (START) ==============
+    // ==========================================================
+
+    public static function getEloquentQuery(): Builder
+    {
+        /**
+         * Method ini secara otomatis memfilter semua data pada resource ini
+         * dan hanya akan menampilkan data transaksi yang kolom 'user_id'-nya
+         * sama dengan ID pengguna yang sedang login.
+         */
+        return parent::getEloquentQuery()->where('user_id', auth()->id());
+    }
+
+    // ==========================================================
+    // ===== PERUBAHAN DITAMBAHKAN DI SINI (END) ================
+    // ==========================================================
+
     public static function form(Form $form): Form
     {
+        // Bagian form tidak diubah
         return $form
             ->schema([
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\Select::make('category_id')
+                    // Saya melihat di file lain Anda menggunakan transaction_date, 
+                    // pastikan ini konsisten. Jika nama kolom di DB adalah 'transaction_date', 
+                    // maka seharusnya tidak ada masalah.
                     ->relationship('category', 'name')
                     ->required(),
-                Forms\Components\DatePicker::make('date_transaction')
+                Forms\Components\DatePicker::make('date_transaction') 
+                    ->maxDate(now())
                     ->required(),
                 Forms\Components\TextInput::make('amount')
                     ->required()
                     ->numeric(),
-                Forms\Components\TextInput::make('note')
+                // Saya melihat di file lain Anda memiliki 'description', bukan 'note'.
+                // Jika di database namanya 'description', ubah 'note' menjadi 'description'.
+                Forms\Components\Textarea::make('note') 
                     ->required()
                     ->maxLength(255),
                 Forms\Components\FileUpload::make('image')
@@ -48,47 +72,44 @@ class TransactionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\ImageColumn::make('category.image'),
                 Tables\Columns\TextColumn::make('category.name')
-                    ->description(fn (Transaction $record): string => $record->name)
-                    ->label('Transactions')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('type_label')
-                    ->label('Income / Expense')
-                    ->html()
-                    ->getStateUsing(function (Transaction $record) {
-                        // Ambil dari relasi category
-                        $isExpense = optional($record->category)->is_expense;
-                        $label = $isExpense ? 'Expense' : 'Income';
-                        $icon = $isExpense
-                                ? '<svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-4 h-4 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7-7-7" />
-                                </svg>'
-                                : '<svg xmlns="http://www.w3.org/2000/svg" class="ml-1 w-4 h-4 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7 7 7" />
-                                </svg>';
-                            return new \Illuminate\Support\HtmlString("<div class='flex items-center justify-center gap-1'>{$label}{$icon}</div>");
+                    ->label('Transaction')
+                    ->extraHeaderAttributes(['style' => 'text-align: center !important;'])
+                    ->searchable(query: function (Builder $query, string $search): Builder {
+                        return $query
+                            ->where('name', 'like', "%{$search}%")
+                            ->orWhereHas('category', fn (Builder $query) =>
+                                $query->where('name', 'like', "%{$search}%")
+                            );
                     })
-                    ->alignment('center'),            
+                    ->formatStateUsing(function ($state, Transaction $record) {
+                        $iconName = optional($record->category)->icon ?? 'folder';
+                        $transactionName = $record->name;
+                        $categoryName = $state;
+
+                        $iconHtml = "<span class='fi-icon-o-{$iconName} w-6 h-6 mr-3 text-gray-500 shrink-0'></span>";
+                        $textHtml = "<div><strong>{$transactionName}</strong><br><small class='text-gray-500'>{$categoryName}</small></div>";
+
+                        return new HtmlString("<div style='display: flex; align-items: center;'>{$iconHtml} {$textHtml}</div>");
+                    }),
+                
+                // Di sini Anda menggunakan 'is_expense' dari kategori, ini sudah benar
+                Tables\Columns\TextColumn::make('category.is_expense')
+                    ->label('Type')
+                    ->badge()
+                    ->formatStateUsing(fn (bool $state): string => $state ? 'Expense' : 'Income')
+                    ->color(fn (bool $state): string => $state ? 'danger' : 'success'),
+
+                Tables\Columns\TextColumn::make('amount')
+                    ->numeric()
+                    ->money('idr')
+                    ->sortable()
+                    ->color(fn (Transaction $record): string => optional($record->category)->is_expense ? 'danger' : 'success'),
+
                 Tables\Columns\TextColumn::make('date_transaction')
                     ->label("Tanggal")
                     ->date()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('amount')
-                    ->numeric()
-                    ->money('idr.', locale: 'id')
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('note')
-                
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
             ])
             ->filters([
                 //

@@ -61,7 +61,7 @@
 
     <!-- Grafik Tren Keuangan -->
   <div class="bg-white shadow rounded-xl p-6">
-    <h2 class="text-2xl font-bold text-gray-800 mb-6">📈 Tren Keuangan 30 Hari Terakhir</h2>
+    <h2 class="text-2xl font-bold text-gray-800 ">📈 Tren Keuangan 30 Hari Terakhir</h2>
     <div class="h-[350px] relative">
         <canvas id="financialChart" class="absolute top-0 left-0 w-full h-full"></canvas>
     </div>
@@ -153,7 +153,7 @@ document.addEventListener('DOMContentLoaded', function () {
 </script>
 </div>
 <!-- Daftar Pengguna Terdaftar -->
-<div class="bg-white shadow rounded-xl p-6 mt-10">
+<div class="bg-white shadow rounded-xl p-6 ">
     <h2 class="text-2xl font-bold text-gray-800 mb-6">👥 Pengguna Terdaftar</h2>
 
     @if($users->count() > 0)
