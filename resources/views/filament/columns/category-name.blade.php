@@ -1,0 +1,1 @@
+<span>{{ $state ?? 'Unknown' }}</span>
