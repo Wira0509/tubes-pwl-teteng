@@ -6,8 +6,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;  
+use Filament\Models\Contracts\HasAvatar;
+use Illuminate\Support\Facades\Storage;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail, HasAvatar
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable;
@@ -21,7 +24,20 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role',
+        'avatar_url'
     ];
+
+    /**
+     * Scope a query to only include users with role 'user'.
+     *
+     * @param \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeUserRole($query)
+    {
+        return $query->where('role', 'user');
+    }
 
     /**
      * The attributes that should be hidden for serialization.
@@ -44,5 +60,14 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function getFilamentAvatarUrl(): ?string
+    {
+        if (! $this->avatar_url) {
+            return null;
+        }
+    
+        return url('/avatar/' . $this->id);
     }
 }
