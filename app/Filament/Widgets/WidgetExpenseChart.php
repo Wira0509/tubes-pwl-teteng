@@ -2,7 +2,7 @@
 
 namespace App\Filament\Widgets;
 
-use Illuminate\Support\Carbon; 
+use Illuminate\Support\Carbon;
 use App\Models\Transaction;
 use Filament\Widgets\ChartWidget;
 use Flowframe\Trend\Trend;
@@ -16,8 +16,10 @@ class WidgetExpenseChart extends ChartWidget
     protected static string $color = 'danger';
     protected function getData(): array
     {
-        
-        $firstDate = Transaction::orderBy('date_transaction')->value('date_transaction');
+        // ===== MODIFIKASI 1: Tambahkan filter user_id untuk mendapatkan tanggal pertama =====
+        $firstDate = Transaction::where('user_id', auth()->id())
+            ->orderBy('date_transaction')
+            ->value('date_transaction');
 
         $startDate = isset($this->filters['startDate']) && $this->filters['startDate']
             ? Carbon::parse($this->filters['startDate'])
@@ -27,8 +29,9 @@ class WidgetExpenseChart extends ChartWidget
             ? Carbon::parse($this->filters['endDate'])
             : now();
 
-          $data = Trend::query(Transaction::expenses())
-          ->dateColumn('date_transaction')
+        // ===== MODIFIKASI 2: Tambahkan filter user_id pada query utama Trend =====
+        $data = Trend::query(Transaction::expenses()->where('user_id', auth()->id()))
+        ->dateColumn('date_transaction')
         ->between(
             start: $startDate,
             end: $endDate,
@@ -36,15 +39,15 @@ class WidgetExpenseChart extends ChartWidget
         ->perDay()
         ->sum('amount');
 
-    return [
-        'datasets' => [
-            [
-                'label' => 'Expense',
-                'data' => $data->map(fn (TrendValue $value) => $value->aggregate),
+        return [
+            'datasets' => [
+                [
+                    'label' => 'Expense',
+                    'data' => $data->map(fn (TrendValue $value) => $value->aggregate),
+                ],
             ],
-        ],
-        'labels' => $data->map(fn (TrendValue $value) => $value->date),
-    ];
+            'labels' => $data->map(fn (TrendValue $value) => $value->date),
+        ];
     }
 
     protected function getType(): string

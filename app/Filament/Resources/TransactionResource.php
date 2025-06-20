@@ -10,7 +10,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Builder; // Pastikan use statement ini ada
 use Illuminate\Support\HtmlString;
 
 class TransactionResource extends Resource
@@ -18,6 +18,24 @@ class TransactionResource extends Resource
     protected static ?string $model = Transaction::class;
 
     protected static ?string $navigationIcon = 'heroicon-s-rectangle-stack';
+
+    // ==========================================================
+    // ===== PERUBAHAN DITAMBAHKAN DI SINI (START) ==============
+    // ==========================================================
+
+    public static function getEloquentQuery(): Builder
+    {
+        /**
+         * Method ini secara otomatis memfilter semua data pada resource ini
+         * dan hanya akan menampilkan data transaksi yang kolom 'user_id'-nya
+         * sama dengan ID pengguna yang sedang login.
+         */
+        return parent::getEloquentQuery()->where('user_id', auth()->id());
+    }
+
+    // ==========================================================
+    // ===== PERUBAHAN DITAMBAHKAN DI SINI (END) ================
+    // ==========================================================
 
     public static function form(Form $form): Form
     {
@@ -28,14 +46,20 @@ class TransactionResource extends Resource
                     ->required()
                     ->maxLength(255),
                 Forms\Components\Select::make('category_id')
+                    // Saya melihat di file lain Anda menggunakan transaction_date, 
+                    // pastikan ini konsisten. Jika nama kolom di DB adalah 'transaction_date', 
+                    // maka seharusnya tidak ada masalah.
                     ->relationship('category', 'name')
                     ->required(),
-                Forms\Components\DatePicker::make('date_transaction')
+                Forms\Components\DatePicker::make('date_transaction') 
+                    ->maxDate(now())
                     ->required(),
                 Forms\Components\TextInput::make('amount')
                     ->required()
                     ->numeric(),
-                Forms\Components\TextInput::make('note')
+                // Saya melihat di file lain Anda memiliki 'description', bukan 'note'.
+                // Jika di database namanya 'description', ubah 'note' menjadi 'description'.
+                Forms\Components\Textarea::make('note') 
                     ->required()
                     ->maxLength(255),
                 Forms\Components\FileUpload::make('image')
@@ -50,7 +74,6 @@ class TransactionResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('category.name')
                     ->label('Transaction')
-                    // [FIX] Ditambahkan !important untuk memaksa style
                     ->extraHeaderAttributes(['style' => 'text-align: center !important;'])
                     ->searchable(query: function (Builder $query, string $search): Builder {
                         return $query
@@ -70,7 +93,7 @@ class TransactionResource extends Resource
                         return new HtmlString("<div style='display: flex; align-items: center;'>{$iconHtml} {$textHtml}</div>");
                     }),
                 
-                // Kolom lain
+                // Di sini Anda menggunakan 'is_expense' dari kategori, ini sudah benar
                 Tables\Columns\TextColumn::make('category.is_expense')
                     ->label('Type')
                     ->badge()
