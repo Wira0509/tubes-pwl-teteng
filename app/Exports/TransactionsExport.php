@@ -11,7 +11,7 @@ class TransactionsExport implements FromArray
         $transactions = Transaction::with('category')->get();
 
         $data[] = [
-            'ID', 'Nama', 'Kategori', 'Tanggal', 'Jumlah', 'Catatan', 'Gambar', 'Dibuat Pada', 'Diperbarui Pada'
+            'ID', 'Nama', 'Kategori', 'Tanggal', 'Jumlah', 'Catatan', 'Dibuat Pada', 'Diperbarui Pada'
         ];
 
         foreach ($transactions as $trx) {
@@ -22,7 +22,6 @@ class TransactionsExport implements FromArray
                 $trx->date_transaction,
                 $trx->amount,
                 $trx->note,
-                $trx->image,
                 $trx->created_at,
                 $trx->updated_at,
             ];
