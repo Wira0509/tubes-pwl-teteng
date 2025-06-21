@@ -2,7 +2,7 @@
 
 Anggota Kelompok 8 :
 
-- Salwa Halila 241402027, Peran :
+- Salwa Halila 241402027, Peran : 
 - Aldrik Noel Sianipar 241402049, Peran :
 - Leondo Admiral Purba 241402053, Peran :
 - Rafi Andara Nasution 241402095, Peran :
@@ -40,12 +40,16 @@ Riwayat Transaksi pemasukan dan pengeluaran dapat didownload berupa file .pdf at
 - ### Laragon
 - ### VSCode
 - ### Bootstrap
+- ### Tailwind
 
 ## Library Yang Dipakai
 
 - ### Laravel Breeze
 - ### Laravel Filament
 - ### Laravel Trend
+- ### Laravel Dompdf
+- ### MaatWebsite Excel
+- ### Joaopaulo Filament Edit Profile
 
 ## Tata Cara Menjalankan Aplikasi
 
@@ -56,10 +60,10 @@ Riwayat Transaksi pemasukan dan pengeluaran dapat didownload berupa file .pdf at
 5. Buat file .env dengan perintah cp .env.example .env, masuk kedalam file .env yang sudah dibuat tadi
 6. Pada line 24-28 silahkan blok kode tersebut dan tekan ctrl+/ agar menguncomment kode tersebut.
 7. Pada line 5 ganti app_url menjadi http://127.0.0.1:8000
-8. Jalankan perintah composer install untuk menginstal semua package yang dibutuhkan proyek, laravel menggunakan composer sebagai depedency manager.
-9. Laravel membutuhkan application key agar enskripsi befungsi dengan baik, jalankan perintah php artisan key:generate
-10. Karena web kami menggunakan library filament jadi install terlebih dahulu package filamentnya, silahkan jalankan perintah composer require filament/filament:"^3.3" -W agar package filament terinstall di perangkata anda
-11. Dan juga kami memakai library laravel trend untuk penampilan data, jalankan perintah composer require flowframe/laravel-trend di terminal agar laravel trend terinstall.
-12. Jalankan perintah php artisan migrate agar tabel-tabel yang diperlukan terinstall didatabase.
-13. Jalankan perintah php artisan storage:link untuk membuat symbolic link (tautan simbolis) antara direktori public/storage dan storage/app/public
-14. Terakhir jalankan perintah php artisan serve agar diarahkan ke sebuah link yang bisa dibuka di website untuk mengakses web ini.
+9. Jalankan perintah composer install untuk menginstal semua package yang dibutuhkan proyek, laravel menggunakan composer sebagai depedency manager.
+10. Laravel membutuhkan application key agar enskripsi befungsi dengan baik, jalankan perintah php artisan key:generate
+13. Jalankan perintah php artisan migrate agar tabel-tabel yang diperlukan terinstall didatabase.
+14. Jalankan perintah php artisan storage:link untuk membuat symbolic link (tautan simbolis) antara direktori public/storage dan storage/app/public
+15. Jalankan perintah php artisan db:seed --class=CategorySeeder dan php artisan db:seed --class=AdminUserSeeder
+16. Jalankan npm install dan npm run dev
+17. Terakhir jalankan perintah php artisan serve agar diarahkan ke sebuah link yang bisa dibuka di website untuk mengakses web ini.
