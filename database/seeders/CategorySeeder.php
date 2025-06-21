@@ -16,22 +16,22 @@ class CategorySeeder extends Seeder
             [
                 'name' => 'Food',
                 'is_expense' => true,
-                'image' => 'food.png',
+                'image' => 'vegan-food-unscreen.gif',
             ],
             [
                 'name' => 'Transport',
                 'is_expense' => true,
-                'image' => 'transport.png',
+                'image' => 'bus-unscreen.gif',
             ],
             [
                 'name' => 'Salary',
                 'is_expense' => false,
-                'image' => 'salary.png',
+                'image' => 'salary-unscreen.gif',
             ],
             [
                 'name' => 'Entertainment',
                 'is_expense' => true,
-                'image' => 'entertainment.png',
+                'image' => 'cinema-unscreen.gif',
             ],
         ];
 

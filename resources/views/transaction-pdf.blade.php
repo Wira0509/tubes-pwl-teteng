@@ -19,7 +19,6 @@
                 <th>Tanggal</th>
                 <th>Jumlah</th>
                 <th>Catatan</th>
-                <th>Gambar</th>
                 <th>Created</th>
                 <th>Updated</th>
             </tr>
@@ -33,7 +32,6 @@
                     <td>{{ $trx->date_transaction }}</td>
                     <td>Rp {{ number_format($trx->amount, 0, ',', '.') }}</td>
                     <td>{{ $trx->note }}</td>
-                    <td>{{ $trx->image }}</td>
                     <td>{{ $trx->created_at }}</td>
                     <td>{{ $trx->updated_at }}</td>
                 </tr>

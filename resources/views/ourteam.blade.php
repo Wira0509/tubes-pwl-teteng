@@ -62,12 +62,18 @@
                     <!-- <a href="" class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block">Get Started</a> -->
                 </div>
 
-               @if (Route::has('login'))
+              @if (Route::has('login'))
 <nav class="flex items-center justify-end gap-4">
     @auth
-        <a href="{{ url('/dashboard') }}" class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block bg-secondary">
-            Dashboard
-        </a>
+        @if(auth()->user()->role === 'admin')
+            <a href="{{ url('/admin/dashboard') }}" class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block bg-secondary">
+                Dashboard
+            </a>
+        @elseif(auth()->user()->role === 'user')
+            <a href="{{ url('/user') }}" class="btn rounded-pill py-2 px-4 ms-3 d-none d-lg-block bg-secondary">
+                Dashboard
+            </a>
+        @endif
     @else
         <div class="navbar-nav"> <!-- Tambahkan container flex untuk grouping -->
             <a
@@ -108,146 +114,119 @@
         </div>
         <!-- Main End -->
 
-        <!-- Team Start -->
-        <div class="container-fluid">
-            <div class="container px-lg-5">
-                <div class="wow fadeInUp" data-wow-delay="0.1s">
-                    <p class="section-title text-secondary justify-content-center"><span></span>Our Team<span></span></p>
-                    <h1 class="text-center mb-5">Our Team Members</h1>
-                </div>
-                <div class="row g-4 py-5">
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
-                        <div class="team-item bg-light rounded">
-                            <div class="text-center border-bottom p-4">
-                                <img class="img-fluid rounded-circle mb-4" src="img/team-1.jpg" alt="">
-                                <h5>Aldrik Noel Sianipar</h5>
-                                <span>President of Indonesia</span>
-                            </div>
-                            <div class="d-flex justify-content-center p-4">
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
-                        <div class="team-item bg-light rounded">
-                            <div class="text-center border-bottom p-4">
-                                <img class="img-fluid rounded-circle mb-4" src="img/team-2.jpg" alt="">
-                                <h5>Wira Hari Pratama</h5>
-                                <span>President of Madagascar</span>
-                            </div>
-                            <div class="d-flex justify-content-center p-4">
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
-                        <div class="team-item bg-light rounded">
-                            <div class="text-center border-bottom p-4">
-                                <img class="img-fluid rounded-circle mb-4" src="img/team-3.jpg" alt="">
-                                <h5>Rafi Andara Nasution</h5>
-                                <span>President of Belanda Barat</span>
-                            </div>
-                            <div class="d-flex justify-content-center p-4">
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.7s">
-                        <div class="team-item bg-light rounded">
-                            <div class="text-center border-bottom p-4">
-                                <img class="img-fluid rounded-circle mb-4" src="img/team-1.jpg" alt="">
-                                <h5>John Doe</h5>
-                                <span>CEO & Founder</span>
-                            </div>
-                            <div class="d-flex justify-content-center p-4">
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.9s">
-                        <div class="team-item bg-light rounded">
-                            <div class="text-center border-bottom p-4">
-                                <img class="img-fluid rounded-circle mb-4" src="img/team-1.jpg" alt="">
-                                <h5>John Doe</h5>
-                                <span>CEO & Founder</span>
-                            </div>
-                            <div class="d-flex justify-content-center p-4">
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="1.1s ">
-                        <div class="team-item bg-light rounded">
-                            <div class="text-center border-bottom p-4">
-                                <img class="img-fluid rounded-circle mb-4" src="img/team-1.jpg" alt="">
-                                <h5>John Doe</h5>
-                                <span>CEO & Founder</span>
-                            </div>
-                            <div class="d-flex justify-content-center p-4">
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-facebook-f"></i></a>
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-twitter"></i></a>
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-instagram"></i></a>
-                                <a class="btn btn-square mx-1" href=""><i class="fab fa-linkedin-in"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!-- Team Start -->
+<div class="container-fluid">
+    <div class="container px-lg-5">
+        <div class="wow fadeInUp" data-wow-delay="0.1s">
+            <p class="section-title text-secondary justify-content-center"><span></span>Our Team<span></span></p>
+            <h1 class="text-center mb-5">Our Team Members</h1>
         </div>
-        <!-- Team End -->
- <!-- Footer Start -->
- <div class="container-fluid bg-primary text-light footer wow fadeIn" data-wow-delay="0.1s">
-            <div class="container py-5 px-lg-5">
-                <div class="g-5 row justify-content-between">
-                    <div class="col-md-6 col-lg-3 py-5">
-                        <p class="section-title text-white h5 mb-4">Address<span></span></p>
-                        <p><i class="fa fa-map-marker-alt me-3"></i>123 Street, New York, USA</p>
-                        <p><i class="fa fa-phone-alt me-3"></i>+012 345 67890</p>
-                        <p><i class="fa fa-envelope me-3"></i>info@tetengfinance.com</p>
-                        <div class="d-flex pt-2">
-                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-twitter"></i></a>
-                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-instagram"></i></a>
-                            <a class="btn btn-outline-light btn-social" href=""><i class="fab fa-linkedin-in"></i></a>
-                        </div>
+        <div class="row g-4 py-5 justify-content-center">
+            <!-- Member 1 -->
+            <div class="col-lg-2 col-md-4 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="team-item bg-light rounded h-100 d-flex flex-column justify-content-between">
+                    <div class="text-center border-bottom p-4">
+                        <img class="img-fluid rounded-circle mb-4" src="img/ALDRIK.jpg" alt="" style="width: 150px; height: 150px; object-fit: cover;">
+                        <h5>Aldrik Noel Sianipar</h5>
+                        <span>FOUNDER</span>
                     </div>
-                    <div class="col-md-6 col-lg-3">
-                        <p class="section-title text-white h5 mb-4">Quick Link<span></span></p>
-                        <a class="btn btn-link" href="{{ route('about') }}">About Us</a>
-                        <a class="btn btn-link" href="{{ route('ourteam') }}">Our Team</a>
-                        <!-- <a class="btn btn-link" href="">Privacy Policy</a>
-                        <a class="btn btn-link" href="">Terms & Condition</a>
-                        <a class="btn btn-link" href="">Career</a> -->
+                    <div class="d-flex justify-content-center p-4 mt-auto">
+                        <a class="btn btn-square mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-square mx-1" href="#"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-square mx-1" href="#"><i class="fab fa-instagram"></i></a>
+                        <a class="btn btn-square mx-1" href="#"><i class="fab fa-linkedin-in"></i></a>
                     </div>
                 </div>
             </div>
-            <div class="container px-lg-5">
-                <div class="copyright">
-                    <div class="row">
-                        <div class="col-md-6 text-center text-md-start mb-3 mb-md-0">
-                            &copy; <a class="border-bottom" href="#">TetengFinance</a>, All Right Reserved.
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Footer End -->
 
+            <!-- Member 2 -->
+            <div class="col-lg-2 col-md-4 wow fadeInUp" data-wow-delay="0.2s">
+                <div class="team-item bg-light rounded h-100 d-flex flex-column justify-content-between">
+                    <div class="text-center border-bottom p-4">
+                        <img class="img-fluid rounded-circle mb-4" src="img/WIRA.jpg" alt="" style="width: 150px; height: 150px; object-fit: cover;">
+                        <h5>Wira Hari Pratama</h5>
+                        <span>FOUNDER</span>
+                    </div>
+                    <div class="d-flex justify-content-center p-4 mt-auto">
+                        <a class="btn btn-square mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-square mx-1" href="#"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-square mx-1" href="#"><i class="fab fa-instagram"></i></a>
+                        <a class="btn btn-square mx-1" href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Member 3 -->
+            <div class="col-lg-2 col-md-4 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="team-item bg-light rounded h-100 d-flex flex-column justify-content-between">
+                    <div class="text-center border-bottom p-4">
+                        <img class="img-fluid rounded-circle mb-4" src="img/RAFI.jpg" alt="" style="width: 150px; height: 150px; object-fit: cover;">
+                        <h5>Rafi Andara Nasution</h5>
+                        <span>FOUNDER</span>
+                    </div>
+                    <div class="d-flex justify-content-center p-4 mt-auto">
+                        <a class="btn btn-square mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-square mx-1" href="#"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-square mx-1" href="#"><i class="fab fa-instagram"></i></a>
+                        <a class="btn btn-square mx-1" href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Member 4 -->
+            <div class="col-lg-2 col-md-4 wow fadeInUp" data-wow-delay="0.4s">
+                <div class="team-item bg-light rounded h-100 d-flex flex-column justify-content-between">
+                    <div class="text-center border-bottom p-4">
+                        <img class="img-fluid rounded-circle mb-4" src="img/YOSIA.jpg" alt="" style="width: 150px; height: 150px; object-fit: cover;">
+                        <h5>Yosia Marcel Koreshy</h5>
+                        <span>FOUNDER</span>
+                    </div>
+                    <div class="d-flex justify-content-center p-4 mt-auto">
+                        <a class="btn btn-square mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-square mx-1" href="#"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-square mx-1" href="#"><i class="fab fa-instagram"></i></a>
+                        <a class="btn btn-square mx-1" href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Member 5 -->
+            <div class="col-lg-2 col-md-4 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="team-item bg-light rounded h-100 d-flex flex-column justify-content-between">
+                    <div class="text-center border-bottom p-4">
+                        <img class="img-fluid rounded-circle mb-4" src="img/LEONDO.jpg" alt="" style="width: 150px; height: 150px; object-fit: cover;">
+                        <h5>Leondo Admiral</h5>
+                        <span>FOUNDER</span>
+                    </div>
+                    <div class="d-flex justify-content-center p-4 mt-auto">
+                        <a class="btn btn-square mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-square mx-1" href="#"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-square mx-1" href="#"><i class="fab fa-instagram"></i></a>
+                        <a class="btn btn-square mx-1" href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Member 6 -->
+            <div class="col-lg-2 col-md-4 wow fadeInUp" data-wow-delay="0.6s">
+                <div class="team-item bg-light rounded h-100 d-flex flex-column justify-content-between">
+                    <div class="text-center border-bottom p-4">
+                        <img class="img-fluid rounded-circle mb-4" src="img/team-2.jpg" alt="" style="width: 150px; height: 150px; object-fit: cover;">
+                        <h5>Salwa Halila</h5>
+                        <span>FOUNDER</span>
+                    </div>
+                    <div class="d-flex justify-content-center p-4 mt-auto">
+                        <a class="btn btn-square mx-1" href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-square mx-1" href="#"><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-square mx-1" href="#"><i class="fab fa-instagram"></i></a>
+                        <a class="btn btn-square mx-1" href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Team End -->
 
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
