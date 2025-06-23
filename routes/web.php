@@ -6,6 +6,8 @@ use App\Http\Controllers\AdminDashboardController;
 use App\Http\Controllers\TransactionExportController;
 use Illuminate\Support\Facades\Storage;
 use App\Models\User;
+use App\Http\Controllers\ContactController;
+use App\Http\Controllers\ReminderController;
 
 Route::get('/home', function () {
     return view('welcome');
@@ -26,10 +28,6 @@ Route::get('/login', function () {
 Route::get('/', function () {
     return view('welcome');
 })->name('welcome');
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -62,4 +60,16 @@ Route::get('/avatar/{user}', function (User $user) {
 
     return response()->file($path);
 })->middleware('web')->name('avatar.view');
+
+Route::post('/admin/user/{user}/toggle', [App\Http\Controllers\AdminDashboardController::class, 'toggleUserStatus'])
+    ->name('admin.toggle-user');
+
+Route::post('/contact/submit', [ContactController::class, 'submit'])->name('contact.submit');
+Route::get('/admin/messages', [ContactController::class, 'adminView'])->name('admin.messages');
+
+Route::get('/dashboard', [AdminDashboardController::class, 'index'])
+    ->middleware('auth')
+    ->name('dashboard');
+
+
 

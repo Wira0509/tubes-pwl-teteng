@@ -23,7 +23,7 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(Request $request): RedirectResponse
+ public function store(Request $request): RedirectResponse
 {
     $request->validate([
         'email' => 'required|email',
@@ -38,15 +38,39 @@ class AuthenticatedSessionController extends Controller
 
     $request->session()->regenerate();
 
-    // Cek peran user setelah login
     $user = Auth::user();
 
-    if ($user->role === 'admin') {
-        return redirect('/admin/dashboard'); //dashboard admin
+    // Cek apakah user tidak login > 6 bulan
+   if ($user->last_login_at && strtotime($user->last_login_at) < strtotime('-6 months')) {
+    // Tandai sebagai nonaktif
+    $user->is_active = false;
+    $user->save();
+
+    Auth::logout();
+    return back()->withErrors(['email' => 'You have not logged in for over 6 months. Your account has been deactivated. Please contact support at Ourteam Menu.']);
+}
+
+
+    // Cek apakah akun aktif
+    if (! $user->is_active) {
+        Auth::logout();
+        return back()->withErrors(['email' => 'Your account is inactive. Please contact support at Ourteam Menu.']);
     }
 
-    return redirect('/user'); // Halaman Filament
+    // Update last login
+    $user->last_login_at = now();
+    $user->save();
+
+    // Arahkan sesuai role
+    if ($user->role === 'admin') {
+        return redirect('/admin/dashboard');
+    }
+
+    return redirect('/user');
 }
+
+
+
 
 
     /**

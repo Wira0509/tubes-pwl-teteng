@@ -22,6 +22,9 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 use Joaopaulolndev\FilamentEditProfile\FilamentEditProfilePlugin;
 use Joaopaulolndev\FilamentEditProfile\Pages\EditProfilePage;
 use Filament\Navigation\MenuItem;
+use App\Filament\Resources\ReminderResource;
+
+
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -52,7 +55,6 @@ class AdminPanelProvider extends PanelProvider
             ->brandLogoHeight('6rem')
             ->topNavigation()
             ->darkMode(false)
-
 
             // Plugins Start
             ->plugins([
