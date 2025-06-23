@@ -228,6 +228,64 @@
 </div>
 <!-- Team End -->
 
+<!-- Contact Start -->
+<div class="container-fluid py-5 wow fadeInUp" data-wow-delay="0.1s">
+    <div class="container px-lg-5">
+        <div class="row g-5">
+            <div class="col-lg-6">
+                <h5 class="section-title text-secondary">Contact Us</h5>
+                <h1 class="mb-4">Let’s Talk About Your Finance and Your Problem</h1>
+                <p class="mb-4">Do you have questions, suggestions, or need help managing your money? Reach out to us — our team is ready to assist you anytime.</p>
+                <div class="d-flex align-items-center mb-3">
+                    <div class="d-flex flex-shrink-0 align-items-center justify-content-center bg-primary text-white rounded-circle me-3" style="width: 50px; height: 50px;">
+                        <i class="fa fa-map-marker-alt"></i>
+                    </div>
+                    <span>123 Street, New York, USA</span>
+                </div>
+                <div class="d-flex align-items-center mb-3">
+                    <div class="d-flex flex-shrink-0 align-items-center justify-content-center bg-primary text-white rounded-circle me-3" style="width: 50px; height: 50px;">
+                        <i class="fa fa-phone-alt"></i>
+                    </div>
+                    <span>+012 345 67890</span>
+                </div>
+                <div class="d-flex align-items-center">
+                    <div class="d-flex flex-shrink-0 align-items-center justify-content-center bg-primary text-white rounded-circle me-3" style="width: 50px; height: 50px;">
+                        <i class="fa fa-envelope-open"></i>
+                    </div>
+                    <span>info@tetengfinance.com</span>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <form action="{{ route('contact.submit') }}" method="POST">
+                    @csrf
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <input type="text" name="name" class="form-control border-0 bg-light px-4" placeholder="Your Name" style="height: 55px;" required>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="email" name="email" class="form-control border-0 bg-light px-4" placeholder="Your Email" style="height: 55px;" required>
+                        </div>
+                        <div class="col-12">
+                            <input type="text" name="subject" class="form-control border-0 bg-light px-4" placeholder="Subject" style="height: 55px;">
+                        </div>
+                        <div class="col-12">
+                            <textarea name="message" class="form-control border-0 bg-light px-4 py-3" rows="4" placeholder="Message"></textarea>
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-primary w-100 py-3" type="submit">Send Message</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!-- Contact End -->
+
+
+
     <!-- JavaScript Libraries -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>

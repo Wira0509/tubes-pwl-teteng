@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Password;
+use App\Models\User;
 
 class PasswordResetLinkController extends Controller
 {
@@ -14,17 +15,28 @@ class PasswordResetLinkController extends Controller
     }
 
     public function store(Request $request)
-    {
-        $request->validate([
-            'email' => ['required', 'email'],
-        ]);
+{
+    $request->validate([
+        'email' => ['required', 'email'],
+    ]);
 
-        $status = Password::sendResetLink(
-            $request->only('email')
-        );
+    $user = User::where('email', $request->email)->first();
 
-        return $status == Password::RESET_LINK_SENT
-            ? back()->with('status', __($status))
-            : back()->withErrors(['email' => __($status)]);
+    if (! $user) {
+        return back()->withErrors(['email' => 'Email Not Found']);
     }
+
+    if (! $user->hasVerifiedEmail()) {
+        $user->sendEmailVerificationNotification();
+        return back()->with('status', 'Email verification link sent. Please check your email.');
+    }
+
+    $status = Password::sendResetLink(
+        $request->only('email')
+    );
+
+    return $status == Password::RESET_LINK_SENT
+        ? back()->with('status', __($status))
+        : back()->withErrors(['email' => __($status)]);
+}
 }

@@ -3,8 +3,23 @@
         {{ __('Forgot your password? No problem. Just let us know your email address and we will email you a password reset link that will allow you to choose a new one.') }}
     </div>
 
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+    <!-- Notifikasi Status -->
+    @if (session('status'))
+        <div class="mb-4 p-4 rounded-md bg-green-100 text-green-800 border border-green-300">
+            {{ session('status') }}
+        </div>
+    @endif
+
+    <!-- Notifikasi Error Umum -->
+    @if ($errors->any())
+        <div class="mb-4 p-4 rounded-md bg-red-100 text-red-800 border border-red-300">
+            <ul class="list-disc list-inside text-sm">
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
 
     <form method="POST" action="{{ route('password.email') }}">
         @csrf
@@ -23,7 +38,6 @@
             <x-primary-button>
                 {{ __('Email Password Reset Link') }}
             </x-primary-button>
-            
         </div>
     </form>
 </x-guest-layout>
