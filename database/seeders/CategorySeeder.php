@@ -33,6 +33,11 @@ class CategorySeeder extends Seeder
                 'is_expense' => true,
                 'image' => 'cinema-unscreen.gif',
             ],
+             [
+                'name' => 'Monthly Bills',
+                'is_expense' => true,
+                'image' => 'money-bills-stack_icon-icons.jpg',
+            ],
         ];
 
         foreach ($defaultCategories as $category) {
