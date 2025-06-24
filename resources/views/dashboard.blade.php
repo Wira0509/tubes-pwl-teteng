@@ -13,7 +13,7 @@
     <!-- HEADER DARK MODE -->
     <header class="bg-gray-800 text-white px-6 py-4 shadow-md flex items-center justify-between">
         <h1 class="text-3xl font-bold tracking-tight">
-            Teteng<span class="text-yellow-400">Finance</span>
+            <span class="text-blue-400">Teteng</span><span class="text-yellow-400">Finance.</span>
         </h1>
         <div id="clock" class="text-sm font-mono bg-gray-700 text-white px-3 py-1 rounded-md shadow"></div>
         <form method="POST" action="{{ route('logout') }}">

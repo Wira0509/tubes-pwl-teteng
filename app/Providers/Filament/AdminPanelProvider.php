@@ -25,6 +25,7 @@ use Filament\Navigation\MenuItem;
 use App\Filament\Resources\ReminderResource;
 
 
+
 class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
@@ -69,7 +70,7 @@ class AdminPanelProvider extends PanelProvider
                     ->icon('heroicon-s-user')
             ])
             // Plugins End
-
+  
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,
